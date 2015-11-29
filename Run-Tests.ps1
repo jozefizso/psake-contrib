@@ -7,5 +7,5 @@ if ($appVeyorJobId) {
 	$url = "https://ci.appveyor.com/api/testresults/nunit/$appVeyorJobId"
 
 	$wc = New-Object 'System.Net.WebClient'
-	$wc.UploadFile($url, '.\TestResult.xml');
+	$wc.UploadFile($url, (Resolve-Path '.\TestResult.xml'));
 }
