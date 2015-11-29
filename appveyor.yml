@@ -8,9 +8,13 @@ branches:
 
 os: Visual Studio 2015
 
-build_script: build.cmd
+install:
+  - cinst pester
+  
+build: false
 
-test: off
+test_script:
+  - ps: . .\Run-Tests.ps1
 
 cache:
   - packages -> **\packages.config
