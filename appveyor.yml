@@ -15,6 +15,3 @@ build: false
 
 test_script:
   - ps: . .\Run-Tests.ps1
-
-cache:
-  - packages -> **\packages.config
