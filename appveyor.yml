@@ -1,0 +1,16 @@
+# psake-contrib
+
+version: 1.0.0-build-{build}
+
+branches:
+  except:
+    - gh-pages
+
+os: Visual Studio 2015
+
+build_script: build.bat
+
+test: off
+
+cache:
+  - packages -> **\packages.config

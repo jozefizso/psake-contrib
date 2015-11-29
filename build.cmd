@@ -1,6 +1,6 @@
 @echo off
 
-NuGet.exe install nuget\packages.config -OutputDirectory packages -ExcludeVersion -Verbosity quiet
+NuGet.exe install nuget\packages.config -OutputDirectory packages -ExcludeVersion
 
 set pester=.\packages\Pester\tools\Pester.psm1
 
