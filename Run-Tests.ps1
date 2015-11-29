@@ -8,4 +8,6 @@ if ($appVeyorJobId) {
 
 	$wc = New-Object 'System.Net.WebClient'
 	$wc.UploadFile($url, (Resolve-Path '.\TestResult.xml'));
+	
+	"Uploaded test results to AppVeyor."
 }
