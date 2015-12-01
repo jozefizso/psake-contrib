@@ -88,3 +88,22 @@ Describe "TeamCity-TestFailed" {
     }
 }
 
+Describe "TeamCity-ConfigureDotNetCoverage" {
+    It "Writes ##teamcity[dotNetCoverage ncover3_home='C:\tools\ncover3']" {
+        TeamCity-ConfigureDotNetCoverage "ncover3_home" "C:\tools\ncover3" | `
+          Should BeExactly "##teamcity[dotNetCoverage ncover3_home='C:\tools\ncover3']"
+    }
+    
+    It "Writes ##teamcity[dotNetCoverage partcover_report_xslts='file.xslt=>generatedFileName.html']" {
+        TeamCity-ConfigureDotNetCoverage "partcover_report_xslts" "file.xslt=>generatedFileName.html" | `
+          Should BeExactly "##teamcity[dotNetCoverage partcover_report_xslts='file.xslt=>generatedFileName.html']"
+    }
+}
+
+Describe "TeamCity-ImportDotNetCoverageResult" {
+    It "Writes ##teamcity[importData type='dotNetCoverage' tool='ncover3' path='C:\BuildAgent\work\build1\results.xml']" {
+        TeamCity-ImportDotNetCoverageResult "ncover3" "C:\BuildAgent\work\build1\results.xml" | `
+          Should BeExactly "##teamcity[importData path='C:\BuildAgent\work\build1\results.xml' tool='ncover3' type='dotNetCoverage']"
+    }
+}
+
