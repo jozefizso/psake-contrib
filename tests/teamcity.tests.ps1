@@ -66,3 +66,25 @@ Describe "TeamCity-TestIgnored" {
           Should BeExactly "##teamcity[testIgnored message='ignore comment' name='testName']"
     }
 }
+
+Describe "TeamCity-TestOutput" {
+    It "Writes ##teamcity[testStdOut name='className.testName' out='text']" {
+        TeamCity-TestOutput "className.testName" "text" | `
+          Should BeExactly "##teamcity[testStdOut name='className.testName' out='text']"
+    }
+}
+
+Describe "TeamCity-TestError" {
+    It "Writes ##teamcity[testStdErr name='className.testName' out='error text']" {
+        TeamCity-TestError "className.testName" "error text" | `
+          Should BeExactly "##teamcity[testStdErr name='className.testName' out='error text']"
+    }
+}
+
+Describe "TeamCity-TestFailed" {
+    It "Writes ##teamcity[testFailed message='failure message' type='comparisonFailure' actual='actual value' expected='expected value' details='message and stack trace' name='MyTest.test2']" {
+        TeamCity-TestFailed "MyTest.test2" "failure message" "message and stack trace" "comparisonFailure" "expected value" "actual value" | `
+          Should BeExactly "##teamcity[testFailed message='failure message' type='comparisonFailure' actual='actual value' expected='expected value' details='message and stack trace' name='MyTest.test2']"
+    }
+}
+
