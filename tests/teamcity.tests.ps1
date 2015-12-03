@@ -107,3 +107,37 @@ Describe "TeamCity-ImportDotNetCoverageResult" {
     }
 }
 
+Describe "TeamCity-ImportFxCopResult" {
+    It "Writes ##teamcity[importData type='FxCop' path='C:\BuildAgent\work\results.xml']" {
+        TeamCity-ImportFxCopResult "C:\BuildAgent\work\results.xml" | `
+          Should BeExactly "##teamcity[importData type='FxCop' path='C:\BuildAgent\work\results.xml']"
+    }
+}
+
+Describe "TeamCity-ImportDuplicatesResult" {
+    It "Writes ##teamcity[importData type='DotNetDupFinder' path='C:\BuildAgent\work\results.xml']" {
+        TeamCity-ImportDuplicatesResult "C:\BuildAgent\work\results.xml" | `
+          Should BeExactly "##teamcity[importData type='DotNetDupFinder' path='C:\BuildAgent\work\results.xml']"
+    }
+}
+
+Describe "TeamCity-ImportInspectionCodeResult" {
+    It "Writes ##teamcity[importData type='ReSharperInspectCode' path='C:\BuildAgent\work\results.xml']" {
+        TeamCity-ImportInspectionCodeResult "C:\BuildAgent\work\results.xml" | `
+          Should BeExactly "##teamcity[importData type='ReSharperInspectCode' path='C:\BuildAgent\work\results.xml']"
+    }
+}
+
+Describe "TeamCity-ImportNUnitReport" {
+    It "Writes ##teamcity[importData type='nunit' path='C:\BuildAgent\work\results.xml']" {
+        TeamCity-ImportNUnitReport "C:\BuildAgent\work\results.xml" | `
+          Should BeExactly "##teamcity[importData type='nunit' path='C:\BuildAgent\work\results.xml']"
+    }
+}
+
+Describe "TeamCity-ImportJSLintReport" {
+    It "Writes ##teamcity[importData type='jslint' path='C:\BuildAgent\work\results.xml']" {
+        TeamCity-ImportJSLintReport "C:\BuildAgent\work\results.xml" | `
+          Should BeExactly "##teamcity[importData type='jslint' path='C:\BuildAgent\work\results.xml']"
+    }
+}
