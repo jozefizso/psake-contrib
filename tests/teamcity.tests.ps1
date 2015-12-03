@@ -141,3 +141,31 @@ Describe "TeamCity-ImportJSLintReport" {
           Should BeExactly "##teamcity[importData type='jslint' path='C:\BuildAgent\work\results.xml']"
     }
 }
+
+Describe "TeamCity-PublishArtifact" {
+    It "Writes ##teamcity[publishArtifacts 'artifacts\*.exe -> App.zip']" {
+        TeamCity-PublishArtifact "artifacts\*.exe -> App.zip" | `
+          Should BeExactly "##teamcity[publishArtifacts 'artifacts\*.exe -> App.zip']"
+    }
+}
+
+Describe "TeamCity-ReportBuildStart" {
+    It "Writes ##teamcity[progressStart 'Compilation started']" {
+        TeamCity-ReportBuildStart "Compilation started" | `
+          Should BeExactly "##teamcity[progressStart 'Compilation started']"
+    }
+}
+
+Describe "TeamCity-ReportBuildProgress" {
+    It "Writes ##teamcity[progressMessage 'Build progress message']" {
+        TeamCity-ReportBuildProgress "Build progress message" | `
+          Should BeExactly "##teamcity[progressMessage 'Build progress message']"
+    }
+}
+
+Describe "TeamCity-ReportBuildFinish" {
+    It "Writes ##teamcity[progressFinish 'Build finished.']" {
+        TeamCity-ReportBuildFinish "Build finished." | `
+          Should BeExactly "##teamcity[progressFinish 'Build finished.']"
+    }
+}
