@@ -118,6 +118,10 @@ function TeamCity-SetBuildNumber([string]$buildNumber) {
 	TeamCity-WriteServiceMessage 'buildNumber' $buildNumber
 }
 
+function TeamCity-SetParameter([string]$name, [string]$value) {
+	TeamCity-WriteServiceMessage 'setParameter' @{ name=$name; value=$value }
+}
+
 function TeamCity-SetBuildStatistic([string]$key, [string]$value) {
 	TeamCity-WriteServiceMessage 'buildStatisticValue' @{ key=$key; value=$value }
 }

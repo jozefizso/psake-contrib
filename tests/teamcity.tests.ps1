@@ -189,6 +189,13 @@ Describe "TeamCity-SetBuildNumber" {
     }
 }
 
+Describe "TeamCity-SetParameter" {
+    It "Writes ##teamcity[setParameter value='value1' name='system.p1']" {
+        TeamCity-SetParameter "system.p1" "value1" | `
+          Should BeExactly "##teamcity[setParameter value='value1' name='system.p1']"
+    }
+}
+
 Describe "TeamCity-SetBuildStatistic" {
     It "Writes ##teamcity[buildStatisticValue key='unittests.count' value='19']" {
         TeamCity-SetBuildStatistic "unittests.count" "19" | `
