@@ -169,3 +169,15 @@ Describe "TeamCity-ReportBuildFinish" {
           Should BeExactly "##teamcity[progressFinish 'Build finished.']"
     }
 }
+
+Describe "TeamCity-ReportBuildStatus" {
+    It "Writes ##teamcity[buildStatus text='{build.status.text}, 10/10 tests passed' status='SUCCESS']" {
+        TeamCity-ReportBuildStatus "SUCCESS" "{build.status.text}, 10/10 tests passed" | `
+          Should BeExactly "##teamcity[buildStatus text='{build.status.text}, 10/10 tests passed' status='SUCCESS']"
+    }
+    
+    It "Writes ##teamcity[buildStatus text='{build.status.text}, 10/10 tests passed'] without optional status attribute." {
+        TeamCity-ReportBuildStatus -text "{build.status.text}, 10/10 tests passed" | `
+          Should BeExactly "##teamcity[buildStatus text='{build.status.text}, 10/10 tests passed']"
+    }
+}

@@ -104,8 +104,14 @@ function TeamCity-ReportBuildFinish([string]$message) {
 	TeamCity-WriteServiceMessage 'progressFinish' $message
 }
 
-function TeamCity-ReportBuildStatus([string]$status, [string]$text='') {
-	TeamCity-WriteServiceMessage 'buildStatus' @{ status=$status; text=$text }
+function TeamCity-ReportBuildStatus([string]$status=$null, [string]$text='') {
+	$messageAttributes = @{ text=$text }
+
+	if (![string]::IsNullOrEmpty($status)) {
+		$messageAttributes.status=$status
+	}
+
+	TeamCity-WriteServiceMessage 'buildStatus' $messageAttributes
 }
 
 function TeamCity-SetBuildNumber([string]$buildNumber) {
