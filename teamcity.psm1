@@ -126,6 +126,14 @@ function TeamCity-SetBuildStatistic([string]$key, [string]$value) {
 	TeamCity-WriteServiceMessage 'buildStatisticValue' @{ key=$key; value=$value }
 }
 
+function TeamCity-EnableServiceMessages() {
+	TeamCity-WriteServiceMessage 'enableServiceMessages'
+}
+
+function TeamCity-DisableServiceMessages() {
+	TeamCity-WriteServiceMessage 'disableServiceMessages'
+}
+
 function TeamCity-CreateInfoDocument([string]$buildNumber='', [boolean]$status=$true, [string[]]$statusText=$null, [System.Collections.IDictionary]$statistics=$null) {
 	$doc=New-Object xml;
 	$buildEl=$doc.CreateElement('build');
@@ -200,9 +208,10 @@ function TeamCity-WriteServiceMessage([string]$messageName, $messageAttributesHa
 	if ($messageAttributesHashOrSingleValue -is [hashtable]) {
 		$messageAttributesString = ($messageAttributesHashOrSingleValue.GetEnumerator() | 
 			%{ "{0}='{1}'" -f $_.Key, (escape $_.Value) }) -join ' '
-	} else {
-		$messageAttributesString = ("'{0}'" -f (escape $messageAttributesHashOrSingleValue))
+      $messageAttributesString = " $messageAttributesString"
+	} elseif ($messageAttributesHashOrSingleValue) {
+		$messageAttributesString = (" '{0}'" -f (escape $messageAttributesHashOrSingleValue))
 	}
 
-	Write-Output "##teamcity[$messageName $messageAttributesString]"
+	Write-Output "##teamcity[$messageName$messageAttributesString]"
 }

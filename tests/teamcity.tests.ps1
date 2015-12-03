@@ -202,3 +202,17 @@ Describe "TeamCity-SetBuildStatistic" {
           Should BeExactly "##teamcity[buildStatisticValue key='unittests.count' value='19']"
     }
 }
+
+Describe "TeamCity-EnableServiceMessages" {
+    It "Writes ##teamcity[enableServiceMessages]" {
+        TeamCity-EnableServiceMessages| `
+          Should BeExactly "##teamcity[enableServiceMessages]"
+    }
+}
+
+Describe "TeamCity-DisableServiceMessages" {
+    It "Writes ##teamcity[disableServiceMessages]" {
+        TeamCity-DisableServiceMessages | `
+          Should BeExactly "##teamcity[disableServiceMessages]"
+    }
+}
