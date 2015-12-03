@@ -181,3 +181,17 @@ Describe "TeamCity-ReportBuildStatus" {
           Should BeExactly "##teamcity[buildStatus text='{build.status.text}, 10/10 tests passed']"
     }
 }
+
+Describe "TeamCity-SetBuildNumber" {
+    It "Writes ##teamcity[buildNumber '1.2.3_{build.number}-ent']" {
+        TeamCity-SetBuildNumber "1.2.3_{build.number}-ent" | `
+          Should BeExactly "##teamcity[buildNumber '1.2.3_{build.number}-ent']"
+    }
+}
+
+Describe "TeamCity-SetBuildStatistic" {
+    It "Writes ##teamcity[buildStatisticValue key='unittests.count' value='19']" {
+        TeamCity-SetBuildStatistic "unittests.count" "19" | `
+          Should BeExactly "##teamcity[buildStatisticValue key='unittests.count' value='19']"
+    }
+}
